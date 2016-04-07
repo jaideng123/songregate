@@ -1,27 +1,24 @@
 var http = require("http");
 var fs = require('fs');
+var pm = require('./playmusic.js')
 
-var counter = 0
+
+var port = Number(process.env.PORT || 3000)
 var songs = []
+
+var server = http.createServer(function (request, response) {
+   response.writeHead(200, {'Content-Type': 'text/plain'});
+   var rand = Math.floor((Math.random() * Number(songs.length)));
+   var name = songs[rand].name;
+   var artist = songs[rand].artist.name
+   pm.streamUrl(songs[rand].playId,function(url){
+      response.end(JSON.stringify({'name':name,'artist':artist,'url':url}));
+   });
+});
 fs.readFile('Songs.json', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
   songs = JSON.parse(data);
-  console.log("finished parsing")
+  server.listen(port);
 });
-var server = http.createServer(function (request, response) {
-
-   // Send the HTTP header 
-   // HTTP Status: 200 : OK
-   // Content Type: text/plain
-   response.writeHead(200, {'Content-Type': 'text/plain'});
-   var rand = Math.floor((Math.random() * Number(songs.length))); 
-   // Send the response body as "Hello World"
-   response.end(JSON.stringify({'name':songs[rand].name,'artist':songs[rand]['artists'][0].name}));
-});
-var port = Number(process.env.PORT || 3000)
-
-server.listen(port);
-
-// Console will print the message
