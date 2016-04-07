@@ -1,15 +1,15 @@
 knn = require('alike');
 
 exports.runKNN = function(user, users, limit){
-	var objectKey = function(o) {return o.taste}
+	//var objectKey = function(o) {console.log(o);return o.taste}
 	options = {
-		k: limit,
-		key: objectKey,
+		k: limit | 3,
+		debug: true
 	}
 	return knn(user, users, options);
 }
 
-//FORGES THE MONOUSER
+//FORGE THE MONOUSER
 exports.createMonoUser = function(users){
 	var user = {};
 	user.taste = {};
@@ -17,14 +17,14 @@ exports.createMonoUser = function(users){
 	user.real = false;
 	var allvotes = {}
 	for (var i = users.length - 1; i >= 0; i--) {
-		for (var key in users[i]) {
-		  if (users[i].hasOwnProperty(key)) {
+		for (var key in users[i].taste) {
+		  if (users[i].taste.hasOwnProperty(key)) {
 		  	if (!allvotes[key]){
-		  		allvotes[key] = {upvotes:0,downvotes:0};
+		  		allvotes[key] = {'upvotes':0,'downvotes':0};
 		  	}
-		    if(users[i][key] === 1)
+		    if(users[i].taste[key] === 1)
 		    	allvotes[key].upvotes += 1 
-		    if(users[i][key] === -1)
+		    if(users[i].taste[key] === -1)
 		    	allvotes[key].downvotes += 1 
 		  }
 		}
@@ -42,17 +42,18 @@ exports.createMonoUser = function(users){
 
 var psuedocount = 0;
 //pass in array of liked and disliked artists (as strings)
-exports.createSeedUser = function(likes, dislikes, songs){
+//creates user that likes/dislikes those things
+exports.createSeedUser = function(likes, dislikes, songs, real){
 	var user = {};
 	user.taste = {};
 	user.name = "SEEDUSER" + psuedocount;
 	psuedocount += 1;
-	user.real = false;
+	user.real = real | false;
 	for (var i = songs.length - 1; i >= 0; i--) {
-		if(likes.indexOf(songs[i].artist.name.toLowerCase()) !== -1)
-			user.taste[songs[i].name.toLowerCase()] = 1;
-		if(dislikes.indexOf(songs[i].artist.name.toLowerCase()) !== -1)
-			user.taste[songs[i].name.toLowerCase()] = -1;
+		if(likes.indexOf(songs[i].artist.name) !== -1)
+			user.taste[songs[i].playId] = 1;
+		if(dislikes.indexOf(songs[i].artist.name) !== -1)
+			user.taste[songs[i].playId] = -1;
 	};
 	return user
 }
