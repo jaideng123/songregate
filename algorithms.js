@@ -1,12 +1,36 @@
 knn = require('alike');
 
 exports.runKNN = function(user, users, limit){
-	//var objectKey = function(o) {console.log(o);return o.taste}
-	options = {
-		k: limit | 3,
-		debug: true
-	}
-	return knn(user, users, options);
+	return exports.distance(users[0].taste, users[3].taste);
+}
+
+exports.distance = function(p1, p2, opts) {
+    var attr, dist, distance, val, x, y;
+    dist = {
+      distance: 0,
+      details: {}
+    };
+    for (attr in p1) {
+      val = p1[attr];
+      x = val;
+      y = p2[attr] | 0;
+      if ((opts != null ? opts.stdv : void 0) && Object.getOwnPropertyNames(opts.stdv).length > 0 && opts.stdv[attr] !== 0) {
+        x /= opts.stdv[attr];
+        y /= opts.stdv[attr];
+      }
+      if ((opts != null ? opts.weights : void 0) && Object.getOwnPropertyNames(opts.weights).length > 0) {
+        x *= opts.weights[attr];
+        y *= opts.weights[attr];
+      }
+      distance = Math.pow(x - y, 2);
+      dist.details[attr] = distance;
+      dist.distance += distance;
+    }
+    if (opts != null ? opts.debug : void 0) {
+      return dist;
+    } else {
+      return dist.distance;
+    }
 }
 
 //FORGE THE MONOUSER

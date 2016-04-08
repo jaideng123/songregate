@@ -9,9 +9,10 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   }
   songs = JSON.parse(data);
   users = [];
-  artists = getArtists(songs).splice(0,100);//encourage some conflict
+  artists = getArtists(songs).splice(0,1000);//encourage some conflict
   //franklin likes hip hop
   users.push(alg.createSeedUser(['DJ Khaled','Kanye West','Jay Z','DMX','J. Cole'],['Dan Croll','David Bowie'],songs));
+  users.push(alg.createSeedUser(['DJ Khaled','Kanye West','Jay Z','DMX','J. Cole','Ke$ha'],['Dan Croll','David Bowie'],songs));
   //brenda likes popular female artists
   users.push(alg.createSeedUser(['Ke$ha','Iggy Azalea','Katy Perry','Lady Gaga','London Grammar'],['DMX'],songs));
   //random users like random things
@@ -27,7 +28,7 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   	users.push(alg.createSeedUser(likes,dislikes,songs,true))
   };
   var mono = alg.createMonoUser(users);
-  console.log(alg.runKNN(users[0],users,5));
+  console.log(alg.runKNN(users[0],users,3));
 
 });
 
