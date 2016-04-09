@@ -11,43 +11,21 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   songs = JSON.parse(data).filter(function(x){return (x.popularity > 70)});
   alg.setSongs(songs);
   console.log(songs.length);
-  users = [];
-  artists = getArtists(songs);//encourage some conflict
-  //franklin likes hip hop
-  users.push(seed.createSeedUser(['Kanye West','Jay Z','DMX','J. Cole','Akon','A$AP Rocky','Kendrick Lamar','Drake','Frank Ocean'],['David Bowie','A$AP Ferg','Justin Bieber'],songs,false));
-  //brenda likes popular female artists
-  users.push(seed.createSeedUser(['Ke$ha','Katy Perry','Lana Del Rey','Avril Lavigne','Ariana Grande','Carly Rae Jepsen','Icona Pop','Beyoncé','Adele'],['DMX'],songs,false));
-  //nathan likes indie artists
-  users.push(seed.createSeedUser(['Bon Iver','AWOLNATION','BØRNS','Cage The Elephant','Fleetwood Mac','Grouplove','Icona Pop','John Mayer','Kendrick Lamar','alt-J'],['Ke$ha','Ariana Grande','Justin Bieber'],songs,false));
-  //keith likes country
-  users.push(seed.createSeedUser(['Zac Brown Band','alt-J','Keith Urban','Kelly Clarkson','Jason Aldean','Florida Georgia Line','Carrie Underwood','Bruce Springsteen','Blake Shelton','Eric Church'],['Kanye West'],songs,false));
-  //armando loves techno
-  users.push(seed.createSeedUser(['Kanye West','Armin van Buuren','DJ Luke Nasty', 'DJ Snake', 'DJ Mustard', 'Daft Punk','David Guetta','MGMT','ODESZA','Skrillex','Steve Aoki','Avicii'],['Florida Georgia Line','Avril Lavigne'],songs,false));
-  //david loves classic rock
-  users.push(seed.createSeedUser(['Bruce Springsteen','David Bowie','AC/DC','Aerosmith','Arctic Monkeys','Def Leppard','Guns N\' Roses','Imagine Dragons','Led Zeppelin','Michael Jackson','The Beatles','The Smashing Pumpkins','Jimi Hendrix'],['DJ Luke Nasty','Ke$ha'],songs,false));
-  //samantha is in middle school
-  users.push(seed.createSeedUser(['John Mayer','Bring Me The Horizon','Bright Eyes','Bon Iver','Capital Cities','Coldplay','Demi Lovato','Ellie Goulding','Fall Out Boy','Evanescence','Foster The People','Green Day','blink-182','WALK THE MOON'],['Guns N\' Roses'],songs,false));
-  //random users like random things
-  console.log("Seed Users Created");
-  for (var i = 10; i >= 0; i--) {
-  	likes = []
-  	dislikes = []
-  	for (var j = 0; j < 15; j++) {
-  		like = Math.floor((Math.random() * Number(artists.length)));
-  		likes.push(artists[like]);
-  	};
-    for (var j = 0; j < 5; j++) {
-      dislike = Math.floor((Math.random() * Number(artists.length)));
-      dislikes.push(artists[dislike]);
-    };
-  	users.push(seed.createSeedUser(likes,dislikes,songs,true))
-  };
-  console.log("Random users created");
+
+  artists = getArtists(songs);
+  users = seed.preMadeUsers(songs);
+  users.push.apply(users, seed.randomUsers(songs,artists, 10));
+
   var mono = alg.createMonoUser(users.filter(function(x){return(x.real)}));
   console.log("Mono User Created");
-  var results = alg.KNN(mono,users,3);
+
+  var neighbors = alg.KNN(mono,users,3);
   console.log("Nearest Neighbors Found");
-  console.log(alg.reccomend(results,mono,songs));
+  var results = alg.reccomend(neighbors,mono,songs,20);
+  for (var i = 0; i < results.length; i++) {
+    var song = results[i];
+    console.log(results[i].name + ' - ' +results[i].artist.name);
+  };
 
 });
 

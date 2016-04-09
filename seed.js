@@ -32,3 +32,21 @@ exports.createSeedUser = function(likes, dislikes, songs, real){
   };
   return user
 }
+
+exports.randomUsers = function(songs,artists,limit){
+  var users = [];
+  for (var i = 0; i < limit; ++i) {
+    likes = []
+    dislikes = []
+    for (var j = 0; j < 15; j++) {
+      like = Math.floor((Math.random() * Number(artists.length)));
+      likes.push(artists[like]);
+    };
+    for (var k = 0; k < 5; k++) {
+      dislike = Math.floor((Math.random() * Number(artists.length)));
+      dislikes.push(artists[dislike]);
+    };
+    users.push(exports.createSeedUser(likes,dislikes,songs,true))
+  };
+  return users;
+}

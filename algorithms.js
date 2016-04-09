@@ -3,7 +3,9 @@ pq = require('js-priority-queue');
 //takes in an array of users and a reference(Mono) user
 exports.songHash = {};
 exports.reccomended = []
-exports.reccomend = function(neighbors,user,songs){
+
+//The heart of our application - takes in nearest neighbors and gets reccomendations
+exports.reccomend = function(neighbors,user,songs,limit){
 	if(Object.keys(exports.songHash).length === 0 && JSON.stringify(exports.songHash) === JSON.stringify({}))
 		exports.setSongs(songs);
 	//gather potential candidates
@@ -20,16 +22,14 @@ exports.reccomend = function(neighbors,user,songs){
 		queue.queue(song);
 	}
 	var results = []
-	for (var i = 0; i < 50; i++) {
+	for (var i = 0; i < limit; i++) {
 		results.push(queue.dequeue())
 	};
 	return results;
-	//sort by score + normalize popularity
 }
 
 exports.KNN = function(user, users, limit){
 	var queue = new pq({ comparator: function(a, b) { return a.dist - b.dist; }});
-	console.log(user);
 	for (var i = users.length - 1; i >= 0; i--) {
 		users[i].dist = exports.distance(user.taste,users[i].taste);
 		queue.queue(users[i]);
