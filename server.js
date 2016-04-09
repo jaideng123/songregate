@@ -2,6 +2,7 @@ var http = require("http");
 var fs = require('fs');
 var pm = require('./playmusic.js')
 var alg = require('./algorithms.js')
+var seed = require('./seed.js')
 
 
 var port = Number(process.env.PORT || 3000)
@@ -17,6 +18,7 @@ var server = http.createServer(function (request, response) {
       response.end(JSON.stringify({'name':name,'artist':artist,'url':url}));
    });
 });
+
 fs.readFile('Songs.json', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
@@ -24,30 +26,16 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   songs = JSON.parse(data).filter(function(x){return (x.popularity > 70)});
   alg.setSongs(songs);
   console.log(songs.length);
-  users = [];
-  artists = getArtists(songs);//encourage some conflict
-  //random users like random things
-  console.log("Seed Users Created");
-  for (var i = 10; i >= 0; i--) {
-    likes = []
-    dislikes = []
-    for (var j = 0; j < 15; j++) {
-      like = Math.floor((Math.random() * Number(artists.length)));
-      likes.push(artists[like]);
-    };
-    for (var j = 0; j < 5; j++) {
-      dislike = Math.floor((Math.random() * Number(artists.length)));
-      dislikes.push(artists[dislike]);
-    };
-    users.push(alg.createSeedUser(likes,dislikes,songs,true))
-  };
-  console.log("Random users created");
+  artists = getArtists(songs);
+  users = seed.preMadeUsers(songs);
+  users.push.apply(users, seed.randomUsers(songs,artists, 10));
+  console.log("Seed users created:"+users.length);
   var mono = alg.createMonoUser(users.filter(function(x){return(x.real)}));
   console.log("Mono User Created");
   var results = alg.KNN(mono,users,3);
   console.log("Nearest Neighbors Found");
-  reccomended = alg.reccomend(results,mono,songs);
-  console.log("reccomended songs found");
+  reccomended = alg.reccomend(results,mono,songs,20);
+  console.log("Reccomended Songs Found:"+reccomended.length);
   server.listen(port);
 });
 var getArtists = function(songs){
