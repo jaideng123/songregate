@@ -1,7 +1,18 @@
-//knn = require('alike');
 pq = require('js-priority-queue');
 
-exports.runKNN = function(user, users, limit){
+//takes in an array of users and a reference(Mono) user
+exports.reccomended = []
+exports.reccomend = function(results,user,songs){
+	//gather potential candidates
+	for (var i = results.length - 1; i >= 0; i--) {
+		for(key in results[i]){
+
+		}
+	};
+	//sort by score + normalize popularity
+}
+
+exports.KNN = function(user, users, limit){
 	var queue = new pq({ comparator: function(a, b) { return a.dist - b.dist; }});
 	console.log(user);
 	for (var i = users.length - 1; i >= 0; i--) {
@@ -15,6 +26,7 @@ exports.runKNN = function(user, users, limit){
 	return results;
 }
 
+//taken and modified with love from https://github.com/axiomzen/Alike/blob/master/lib/util.js
 exports.distance = function(p1, p2, opts) {
     var attr, dist, distance, val, x, y;
     dist = {
