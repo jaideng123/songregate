@@ -1,14 +1,29 @@
 pq = require('js-priority-queue');
 
 //takes in an array of users and a reference(Mono) user
+exports.songHash = {};
 exports.reccomended = []
-exports.reccomend = function(results,user,songs){
+exports.reccomend = function(neighbors,user,songs){
+	if(Object.keys(exports.songHash).length === 0 && JSON.stringify(exports.songHash) === JSON.stringify({}))
+		exports.setSongs(songs);
 	//gather potential candidates
-	for (var i = results.length - 1; i >= 0; i--) {
-		for(key in results[i]){
-
+	for (var i = 0; i < neighbors.length; ++i) {
+		for(key in neighbors[i].taste){
+			if(user.taste[key] === undefined)
+				user.taste[key] = neighbors[i].taste[key]
 		}
 	};
+	var queue = new pq({ comparator: function(a, b) { return b.score - a.score; }});
+	for(key in user.taste){
+		var song = exports.songHash[key]
+		song.score = user.taste[key] + (song.popularity/1000)
+		queue.queue(song);
+	}
+	var results = []
+	for (var i = 0; i < 50; i++) {
+		results.push(queue.dequeue())
+	};
+	return results;
 	//sort by score + normalize popularity
 }
 
@@ -91,20 +106,9 @@ exports.createMonoUser = function(users){
 	return user
 }
 
-var psuedocount = 0;
-//pass in array of liked and disliked artists (as strings)
-//creates user that likes/dislikes those things
-exports.createSeedUser = function(likes, dislikes, songs, real){
-	var user = {};
-	user.taste = {};
-	user.name = "SEEDUSER" + psuedocount;
-	psuedocount += 1;
-	user.real = real;
+exports.setSongs = function(songs){
+	exports.songHash = {}
 	for (var i = songs.length - 1; i >= 0; i--) {
-		if(likes.indexOf(songs[i].artist.name) !== -1)
-			user.taste[songs[i].playId] = 1;
-		if(dislikes.indexOf(songs[i].artist.name) !== -1)
-			user.taste[songs[i].playId] = -1;
+		exports.songHash[songs[i].playId] = songs[i];
 	};
-	return user
 }
