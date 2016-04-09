@@ -1,7 +1,18 @@
-knn = require('alike');
+//knn = require('alike');
+pq = require('js-priority-queue');
 
 exports.runKNN = function(user, users, limit){
-	return exports.distance(users[0].taste, users[3].taste);
+	var queue = new pq({ comparator: function(a, b) { return a.dist - b.dist; }});
+	console.log(user);
+	for (var i = users.length - 1; i >= 0; i--) {
+		users[i].dist = exports.distance(user.taste,users[i].taste);
+		queue.queue(users[i]);
+	};
+	var results = []
+	for (var i = 0; i < limit; i++) {
+		results.push(queue.dequeue());
+	};
+	return results;
 }
 
 exports.distance = function(p1, p2, opts) {
@@ -14,7 +25,9 @@ exports.distance = function(p1, p2, opts) {
       val = p1[attr];
       x = val;
       y = p2[attr] | 0;
-      if ((opts != null ? opts.stdv : void 0) && Object.getOwnPropertyNames(opts.stdv).length > 0 && opts.stdv[attr] !== 0) {
+      if(p2[attr] === undefined)
+      	continue;
+      if ((opts != null ? opts.stdv : void 0) && Object.getOwnPropertyNames(opts.stdv).length > 0) {
         x /= opts.stdv[attr];
         y /= opts.stdv[attr];
       }
@@ -29,6 +42,8 @@ exports.distance = function(p1, p2, opts) {
     if (opts != null ? opts.debug : void 0) {
       return dist;
     } else {
+      if(dist.distance === 0)
+      	return Infinity;
       return dist.distance;
     }
 }
@@ -72,7 +87,7 @@ exports.createSeedUser = function(likes, dislikes, songs, real){
 	user.taste = {};
 	user.name = "SEEDUSER" + psuedocount;
 	psuedocount += 1;
-	user.real = real | false;
+	user.real = real;
 	for (var i = songs.length - 1; i >= 0; i--) {
 		if(likes.indexOf(songs[i].artist.name) !== -1)
 			user.taste[songs[i].playId] = 1;

@@ -9,12 +9,12 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   }
   songs = JSON.parse(data);
   users = [];
-  artists = getArtists(songs).splice(0,1000);//encourage some conflict
+  artists = getArtists(songs).splice(0,100);//encourage some conflict
   //franklin likes hip hop
-  users.push(alg.createSeedUser(['DJ Khaled','Kanye West','Jay Z','DMX','J. Cole'],['Dan Croll','David Bowie'],songs));
-  users.push(alg.createSeedUser(['DJ Khaled','Kanye West','Jay Z','DMX','J. Cole','Ke$ha'],['Dan Croll','David Bowie'],songs));
+  users.push(alg.createSeedUser(['DJ Khaled','Kanye West','Jay Z','DMX','J. Cole'],['Dan Croll','David Bowie'],songs,true));
+  users.push(alg.createSeedUser(['DJ Khaled','Kanye West','Jay Z','DMX','J. Cole','Ke$ha'],['Dan Croll','David Bowie'],songs,true));
   //brenda likes popular female artists
-  users.push(alg.createSeedUser(['Ke$ha','Iggy Azalea','Katy Perry','Lady Gaga','London Grammar'],['DMX'],songs));
+  users.push(alg.createSeedUser(['Ke$ha','Iggy Azalea','Katy Perry','Lady Gaga','London Grammar'],['DMX'],songs,true));
   //random users like random things
   for (var i = 100; i >= 0; i--) {
   	likes = []
@@ -25,10 +25,10 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   		likes.push(artists[like]);
   		dislikes.push(artists[dislike]);
   	};
-  	users.push(alg.createSeedUser(likes,dislikes,songs,true))
+  	users.push(alg.createSeedUser(likes,dislikes,songs,false))
   };
-  var mono = alg.createMonoUser(users);
-  console.log(alg.runKNN(users[0],users,3));
+  var mono = alg.createMonoUser(users.filter(function(x){return(x.real)}));
+  console.log(alg.runKNN(mono,users,5));
 
 });
 
