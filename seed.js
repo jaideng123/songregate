@@ -21,6 +21,12 @@ exports.preMadeUsers = function(songs){
   users.push(exports.createSeedUser(['Metallica','Def Leppard','AC/DC','Jimi Hendrix','Phil Collins','Led Zeppelin','Journey','The Strokes','Train','Aerosmith','Bob Dylan','Guns N\' Roses'],['Rachel Platten','Selena Gomez','T-Pain'],songs,false));
   //natasha is pro women
   users.push(exports.createSeedUser(['Ke$ha','Ariana Grande','Rachel Platten','Selena Gomez','Miley Cyrus','Rihanna','Shakira','Ellie Goulding','Beyoncé','Demi Lovato','Destiny\'s Child','Elle King'],['Chris Brown','Usher','Kanye West','T-Pain'],songs,false));
+  //Carrie likes hip hop and RNB
+  users.push(exports.createSeedUser(['Fort Minor','Hailee Steinfeld','JAY Z','Jessie J','Nicki Minaj','Tinashe','The Lumineers','T-Pain','Snoop Dogg','Kanye West','Ariana Grande','2 Chainz','50 Cent'],['Norah Jones','Cher'],songs,false));
+  //Alan likes pretty much anything
+  users.push(exports.createSeedUser(['Blake Shelton','Arctic Monkeys','Cole Swindell','Disturbed','Earth, Wind & Fire','George Michael','Grouplove','Jason Derulo','Linkin Park','M83','Red Hot Chili Peppers'],['Icona Pop'],songs,false));
+  //Cole likes rap and hip hop
+  users.push(exports.createSeedUser(['Wiz Khalifa','Usher','Nicki Minaj','Ty Dolla $ign','Pitbull','N.W.A.','Modest Mouse','Lupe Fiasco','Lil Wayne','J. Cole','Flo Rida','Eminem','DNCE','Chris Brown'],['Coldplay','Whitney Houston','The Beatles'],songs,false));
   return users;
 }
 var psuedocount = 0;
