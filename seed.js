@@ -18,7 +18,9 @@ exports.preMadeUsers = function(songs){
   //clay likes more modern artists and leans to more pop songs
   users.push(exports.createSeedUser(['Carly Rae Jepsen','Carrie Underwood','Coldplay','Adele','Avicii','Demi Lovato','Ed Sheeran','Icona Pop','Katy Perry','Maroon 5','OneRepublic'],['Daft Punk', 'Def Leppard','AC/DC','Jimi Hendrix'],songs,false));
   //chris likes rock artiists
-  users.push(exports.createSeedUser(['Def Leppard','AC/DC','Jimi Hendrix','Phil Collins','Led Zeppelin','Journey','The Strokes','Train','Aerosmith','Bob Dylan','Guns N\' Roses'],['Rachel Platten','Selena Gomez','T-Pain'],songs,false));
+  users.push(exports.createSeedUser(['Metallica','Def Leppard','AC/DC','Jimi Hendrix','Phil Collins','Led Zeppelin','Journey','The Strokes','Train','Aerosmith','Bob Dylan','Guns N\' Roses'],['Rachel Platten','Selena Gomez','T-Pain'],songs,false));
+  //natasha is pro women
+  users.push(exports.createSeedUser(['Ke$ha','Ariana Grande','Rachel Platten','Selena Gomez','Miley Cyrus','Rihanna','Shakira','Ellie Goulding','Beyoncé','Demi Lovato','Destiny\'s Child','Elle King'],['Chris Brown','Usher','Kanye West','T-Pain'],songs,false));
   return users;
 }
 var psuedocount = 0;
