@@ -27,6 +27,10 @@ exports.preMadeUsers = function(songs){
   users.push(exports.createSeedUser(['Blake Shelton','Arctic Monkeys','Cole Swindell','Disturbed','Earth, Wind & Fire','George Michael','Grouplove','Jason Derulo','Linkin Park','M83','Red Hot Chili Peppers'],['Icona Pop'],songs,false));
   //Cole likes rap and hip hop
   users.push(exports.createSeedUser(['Wiz Khalifa','Usher','Nicki Minaj','Ty Dolla $ign','Pitbull','N.W.A.','Modest Mouse','Lupe Fiasco','Lil Wayne','J. Cole','Flo Rida','Eminem','DNCE','Chris Brown'],['Coldplay','Whitney Houston','The Beatles'],songs,false));
+  //jason likes recent popular artists
+  users.push(exports.createSeedUser(['Coldplay','Charlie Puth','Carly Rae Jepsen','Calvin Harris','Ariana Grande','OneRepublic','Alicia Keys','One Direction','Modest Mouse','Selena Gomez','Tinashe'],['Skrillex','blink-182'],songs,false));
+  //sean likes rock and roll new and old
+  users.push(exports.createSeedUser(['Radiohead','Queen','Red Hot Chili Peppers','Slipknot','Train','AC/DC','Def Leppard','Eagles','Journey','Maroon 5','Modest Mouse','Muse','Of Monsters and Men','OneRepublic','One Direction'],['Wiz Khalifa','50 Cent'],songs,false));
   return users;
 }
 var psuedocount = 0;
