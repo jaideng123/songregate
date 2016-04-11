@@ -13,7 +13,9 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   console.log(songs.length);
 
   artists = getArtists(songs);
+  console.log('Making premade seed users - these wont be included in the mono user')
   users = seed.preMadeUsers(songs);
+  console.log('Making 5 random users')
   users.push.apply(users, seed.randomUsers(songs,artists, 5));
 
   var mono = alg.createMonoUser(users.filter(function(x){return(x.real)}));
