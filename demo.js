@@ -14,7 +14,7 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
 
   artists = getArtists(songs);
   users = seed.preMadeUsers(songs);
-  users.push.apply(users, seed.randomUsers(songs,artists, 10));
+  users.push.apply(users, seed.randomUsers(songs,artists, 5));
 
   var mono = alg.createMonoUser(users.filter(function(x){return(x.real)}));
   console.log("Mono User Created");
@@ -22,6 +22,8 @@ fs.readFile('Songs.json', 'utf8', function (err,data) {
   var neighbors = alg.KNN(mono,users,3);
   console.log("Nearest Neighbors Found");
   var results = alg.reccomend(neighbors,mono,songs,20);
+  console.log('')
+  console.log('Reccomendations:')
   for (var i = 0; i < results.length; i++) {
     var song = results[i];
     console.log(results[i].name + ' - ' +results[i].artist.name);

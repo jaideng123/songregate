@@ -62,7 +62,17 @@ exports.randomUsers = function(songs,artists,limit){
       dislike = Math.floor((Math.random() * Number(artists.length)));
       dislikes.push(artists[dislike]);
     };
-    users.push(exports.createSeedUser(likes,dislikes,songs,true))
+    console.log("USER"+i)
+    console.log('--Likes:')
+    for (var j = 0; j < likes.length; j++) {
+      console.log(likes[j])
+    };
+    console.log('--Dislikes:')
+    for (var j = 0; j < dislikes.length; j++) {
+      console.log(dislikes[j])
+    };
+    console.log("")
+    users.push(exports.createSeedUser(likes,dislikes,songs,true));
   };
   return users;
 }
