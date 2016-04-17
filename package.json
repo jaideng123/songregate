@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "js-priority-queue": "^0.1.5"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-sass": "~2.2.0"
   }
 }
