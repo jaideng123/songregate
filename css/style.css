@@ -38,10 +38,10 @@ body {
   border-style: solid;
   border-color: #647678; }
 
-.like-button {
+.like-button:hover {
   color: #59D8E5; }
 
-.dislike-button {
+.dislike-button:hover {
   color: #59D8E5; }
 
 .music-control {
@@ -54,3 +54,5 @@ body {
   margin-left: 0 !important;
   padding-top: 20px;
   padding-bottom: 20px; }
+  .music-control__button:hover {
+    color: #59D8E5; }

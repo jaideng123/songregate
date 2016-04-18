@@ -65,13 +65,17 @@ body{
 }
 
 .like-button{
-	color:$accent-color;
+	&:hover{
+		color:$accent-color;
+	}
 	&--active{
 
 	}
 }
 .dislike-button{
-	color:$accent-color;
+	&:hover{
+		color:$accent-color;
+	}
 	&--active{
 
 	}
@@ -87,4 +91,7 @@ body{
   margin-left:0 !important;
   padding-top: 20px;
   padding-bottom:20px;
+  &__button:hover{
+  	color:$accent-color;
+  }
 }
