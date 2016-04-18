@@ -3,51 +3,37 @@
 </div>
 <h4 class='text-center block--padded'> Why don't you rate some artists for us? </h4>
 <!-- These will be random-ish -->
+<!-- Store these until they click join room, then send them to the server -->
 <div class='row text-center'>
     <div class='small-12 medium-8 column medium-centered'>
+    	<!-- Repeat this for each artist we get (usually 5) -->
         <div class='row artist-list__artist'>
         	<div class='small-12 medium-6 column medium-centered'>
-            	<div class='small-8 column artist-list__artist-name'>Taylor Swift</div>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-o-up fa-lg '></i></button>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-o-down fa-lg'></i></button>
+            	<div class='small-8 column artist-list__artist-name'>{{'Artist Name'}}</div>
+            	<button class='small-2 column like-button'>
+            		<!-- Hide whichever is inactive -->
+            		<i class='fa fa-thumbs-o-up fa-lg'></i>
+            		<i class='fa fa-thumbs-up fa-lg'></i>
+            	</button>
+            	<button class='small-2 column like-button'>
+            		<!-- Hide whichever is inactive -->
+            		<i class='fa fa-thumbs-o-down fa-lg'></i>
+            		<i class='fa fa-thumbs-down fa-lg'></i>
+            	</button>
             </div>
         </div>
-        <div class='row artist-list__artist'>
-        	<div class='small-12 medium-6 column medium-centered'>
-            	<div class='small-8 column artist-list__artist-name'>Kanye West</div>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-up fa-lg '></i></button>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-o-down fa-lg'></i></button>
-            </div>
-        </div>
-        <div class='row artist-list__artist'>
-        	<div class='small-12 medium-6 column medium-centered'>
-            	<div class='small-8 column artist-list__artist-name'>Keith Urban</div>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-o-up fa-lg '></i></button>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-down fa-lg'></i></button>
-            </div>
-        </div>
-        <div class='row artist-list__artist'>
-        	<div class='small-12 medium-6 column medium-centered'>
-            	<div class='small-8 column artist-list__artist-name'>Avicii</div>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-up fa-lg '></i></button>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-o-down fa-lg'></i></button>
-            </div>
-        </div>
-        <div class='row artist-list__artist'>
-        	<div class='small-12 medium-6 column medium-centered'>
-            	<div class='small-8 column artist-list__artist-name'>AWOL Nation</div>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-up fa-lg '></i></button>
-            	<button class='small-2 column like-button'><i class='fa fa-thumbs-o-down fa-lg'></i></button>
-            </div>
-        </div>
+        <!-- END Repeat -->
     </div>
 </div>
+<!-- Hide this part until we get a response from the server -->
 <h4 class='text-center'> Here is your user code, make sure you to hold on to it</h4>
 <div class='row text-center'>
   <div class='medium-6 small-centered column user-code'>
-  	<span class='user-code__box'> <span class='user-code__code'>AJRTX</span> </span>
+  	<span class='user-code__box'> <span class='user-code__code'>{{'AJRTX'}}</span> </span>
   </div>
 </div>
+<!-- Sends liked artists to the server and routes the user to music/<USERID> -->
 <div class='row text-center'>
     <button class='button success'>Join Room</button>
 </div>
+<!-- END Hide -->
