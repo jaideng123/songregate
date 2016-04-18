@@ -16,7 +16,7 @@ songregateApp.config(['$routeProvider',
         templateUrl: 'partials/welcome.html',
         controller: 'WelcomeCtrl'
       }).
-      when('/getting-started/:userId', {
+      when('/getting-started', {
         templateUrl: 'partials/getting-started.html',
         controller: 'StartCtrl'
       }).

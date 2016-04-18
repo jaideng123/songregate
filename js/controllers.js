@@ -11,6 +11,7 @@ songregateControllers.controller('WelcomeCtrl', ['$scope',
 
 songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
+    
   }]);
 
 songregateControllers.controller('StartCtrl', ['$scope', '$routeParams',

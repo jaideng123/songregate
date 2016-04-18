@@ -1,3 +1,90 @@
+$background-light: #647678;
+$background-darker: #2F3738;
+$text-color:#D5FBFF;
+$accent-color:#59D8E5;
 body{
-	background-color: #fff
+	background-color: $background-light;
+	color: $text-color;
+	font-family: 'Arimo', sans-serif;
+}
+
+.view-frame{
+	background-color:$background-darker;
+	height:100vh;
+}
+.logo{
+	font-family: 'Lobster', cursive;
+	&--big{
+		font-size: 60px;
+		font-family: 'Lobster', cursive;
+	}
+}
+.block{
+	&--padded{
+		padding-top:20px;
+	}
+}
+.sign-in{
+	&__textbox{
+		max-width: 150px;
+		font-size: 24px;
+	}
+	&__button{
+		&--rejoin{
+
+		}
+		&--new-user{
+
+		}
+	}
+}
+.user-code{
+	margin-bottom:20px;
+	text-align:center;
+	color:$accent-color;
+	&__box{
+		border-width:3px;
+		border-style:solid;
+		margin:20px;
+		font-size:30px;
+	}
+	&__code{
+		
+	}
+}
+
+.artist-list{
+	&__artist{
+		margin-bottom: 10px;
+	}
+	&__artist-name{
+		border-width: 0 1px 0 0;
+		border-style: solid;
+		border-color:$background-light;
+	}
+}
+
+.like-button{
+	color:$accent-color;
+	&--active{
+
+	}
+}
+.dislike-button{
+	color:$accent-color;
+	&--active{
+
+	}
+}
+
+.music-control{
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  background-color:$background-darker;
+  margin-right: 0 !important;
+  margin-left:0 !important;
+  padding-top: 20px;
+  padding-bottom:20px;
 }

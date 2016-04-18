@@ -1,2 +1,56 @@
 body {
-  background-color: #fff; }
+  background-color: #647678;
+  color: #D5FBFF;
+  font-family: 'Arimo', sans-serif; }
+
+.view-frame {
+  background-color: #2F3738;
+  height: 100vh; }
+
+.logo {
+  font-family: 'Lobster', cursive; }
+  .logo--big {
+    font-size: 60px;
+    font-family: 'Lobster', cursive; }
+
+.block--padded {
+  padding-top: 20px; }
+
+.sign-in__textbox {
+  max-width: 150px;
+  font-size: 24px; }
+
+.user-code {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #59D8E5; }
+  .user-code__box {
+    border-width: 3px;
+    border-style: solid;
+    margin: 20px;
+    font-size: 30px; }
+
+.artist-list__artist {
+  margin-bottom: 10px; }
+
+.artist-list__artist-name {
+  border-width: 0 1px 0 0;
+  border-style: solid;
+  border-color: #647678; }
+
+.like-button {
+  color: #59D8E5; }
+
+.dislike-button {
+  color: #59D8E5; }
+
+.music-control {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  background-color: #2F3738;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  padding-top: 20px;
+  padding-bottom: 20px; }
