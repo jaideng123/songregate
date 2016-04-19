@@ -1,3 +1,4 @@
+<div ng-controller="StartCtrl">
 <div class="row">
     <h3 class='text-center'>Hi there, we're just getting things set up for you</h3>
 </div>
@@ -29,11 +30,12 @@
 <h4 class='text-center'> Here is your user code, make sure you to hold on to it</h4>
 <div class='row text-center'>
   <div class='medium-6 small-centered column user-code'>
-  	<span class='user-code__box'> <span class='user-code__code'>{{'AJRTX'}}</span> </span>
+  	<span class='user-code__box'> <span class='user-code__code'>{{ userID }}</span> </span>
   </div>
 </div>
 <!-- Sends liked artists to the server and routes the user to music/<USERID> -->
 <div class='row text-center'>
     <button class='button success'>Join Room</button>
+</div>
 </div>
 <!-- END Hide -->
