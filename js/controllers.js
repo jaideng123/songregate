@@ -16,12 +16,14 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams',
 
 songregateControllers.controller('StartCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
+    $scope.artists = []
     $scope.userID = makeid()
 	  
+    //this whole function will be server-side once we get it up and running
 	  function makeid()
 	  {
 		  var text = "";
-		  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		  
 		  for( var i=0; i < 5; i++ )
 			  text += possible.charAt(Math.floor(Math.random() * possible.length));
