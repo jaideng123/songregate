@@ -1,19 +1,20 @@
+<div ng-controller="MusicCtrl">
 <div class='row text-center'>
   <div class='medium-6 small-centered column user-code'>
   	<!-- You should already have this -->
-  	<span class='user-code__box'> <span class='user-code__code'>{{'AJRTX'}}</span> </span>
+	<span class='user-code__box'> <span class='user-code__code'>{{'AJRTX'}}</span> </span>
   </div>
 </div>
 <div class='row text-center'>
 	<!-- Song -->
-	<h5>{{'22'}}</h5>
+	<h5>{{ currentsong }}</h5>
 	<!-- Artist - Album -->
-	<h5>{{'Taylor Swift' + ' - '+ '1989'}}</h5>
+	<h5>{{ artist + ' - ' + album }}</h5>
 </div>
 <div class='row'>
 	<div class='small-10 medium-6 column small-centered'>
 		<!-- replace what's inside ng-src with the variable that holds the album art url -->
-		<img ng-src="http://s.newsweek.com/sites/www.newsweek.com/files/2014/10/26/image-1989.png" alt="">
+		<img ng-src= "{{ artURL }}" alt="">
 	</div>
 </div>
 <div class='row music-control'>
