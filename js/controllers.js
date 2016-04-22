@@ -16,7 +16,7 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams',
 	$scope.artist = "Taylor Swift"
 	$scope.album = "1989"
 	$scope.artURL = "http://s.newsweek.com/sites/www.newsweek.com/files/2014/10/26/image-1989.png"
-	
+	$scope.userid = $location.path().split('/')[2] //will be in form ['','music','userid']
   }]);
 
 songregateControllers.controller('StartCtrl', ['$scope', '$routeParams',
