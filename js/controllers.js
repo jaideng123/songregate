@@ -9,8 +9,8 @@ songregateControllers.controller('WelcomeCtrl', ['$scope',
 	
   }]);
 
-songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', $location,
+  function($scope, $routeParams, $location) {
     //just hardcoded for now until server is up
     $scope.currentsong = "22"
 	$scope.artist = "Taylor Swift"
