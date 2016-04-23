@@ -9,7 +9,7 @@ var seed = require('./seed.js')
 var port = Number(process.env.PORT || 3000)
 var songs = []
 var reccomended = []
-var current_song = {}
+exports.current_song = {}
 var users = []
 
 var server = http.createServer(function(request, response) {
@@ -42,30 +42,35 @@ var server = http.createServer(function(request, response) {
             var name = song.name;
             var artist = song.artist.name
             var album = song.album;
-            if(request_url.query === '?url=true'){
-              pm.streamUrl(song.playId, function(url) {
-                  response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album':album }));
-              });
+            if (request_url.query === 'url=true') {
+                pm.streamUrl(song.playId, function(url) {
+                    response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album }));
+                });
+            } 
+            else {
+                response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album }));
             }
-            else{
-              response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album':album }));
-            }
-        }
+        } 
         else if (request_url.pathname.split('/')[2] === 'next') {
             var song = reccomended.pop();
+            if(reccomended.length === 0){
+              reccomended = getReccomended(10);
+            }
             var name = song.name;
             var artist = song.artist.name
-            var current_song = song;
-            if(request_url.query === '?url=true'){
-              pm.streamUrl(song.playId, function(url) {
-                  response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album':album }));
-              });
-            }
-            else{
-              response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album':album }));
+            current_song = song;
+            var album = song.album;
+            if (request_url.query === 'url=true') {
+                pm.streamUrl(song.playId, function(url) {
+                    response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album }));
+                });
+            } 
+            else {
+                response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album }));
             }
         }
-    } else {
+    } 
+    else {
         response.writeHead(404, { "Content-Type": "text/plain" });
         response.write("404 Not Found\n");
         response.end();
@@ -78,20 +83,16 @@ fs.readFile('Songs.json', 'utf8', function(err, data) {
         return console.log(err);
     }
     songs = JSON.parse(data).filter(function(x) {
-        return (x.popularity > 70) });
+        return (x.popularity > 70)
+    });
     alg.setSongs(songs);
     console.log(songs.length);
     artists = getArtists(songs);
     users = seed.preMadeUsers(songs);
     users.push.apply(users, seed.randomUsers(songs, artists, 1));
     console.log("Seed users created:" + users.length);
-    var mono = alg.createMonoUser(users.filter(function(x) {
-        return (x.real) }));
-    console.log("Mono User Created");
-    var results = alg.KNN(mono, users, 3);
-    console.log("Nearest Neighbors Found");
-    reccomended = alg.reccomend(results, mono, songs, 20);
-    console.log("Reccomended Songs Found:" + reccomended.length);
+    reccomended = getReccomended(5);
+    current_song = reccomended.pop();
     server.listen(port);
 });
 
@@ -123,4 +124,16 @@ var randomId = function() {
         text = makeid()
     */
     return text;
+}
+
+var getReccomended = function(limit){
+  var mono = alg.createMonoUser(users.filter(function(x) {
+      return (x.real)
+  }));
+  console.log("Mono User Created");
+  var results = alg.KNN(mono, users, 3);
+  console.log("Nearest Neighbors Found");
+  var reccomended_songs = alg.reccomend(results, mono, songs, limit);
+  console.log("Reccomended Songs Found:" + reccomended_songs.length);
+  return reccomended_songs
 }
