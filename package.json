@@ -10,7 +10,8 @@
   "author": "Jaiden Gerig",
   "license": "ISC",
   "dependencies": {
-    "js-priority-queue": "^0.1.5"
+    "js-priority-queue": "^0.1.5",
+    "qs": "~6.1.0"
   },
   "devDependencies": {
     "gulp": "~3.9.1",

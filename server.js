@@ -1,5 +1,6 @@
 var http = require("http");
 var url = require('url');
+var qs = require('qs');
 var fs = require('fs');
 var pm = require('./playmusic.js')
 var alg = require('./algorithms.js')
@@ -9,12 +10,15 @@ var seed = require('./seed.js')
 var port = Number(process.env.PORT || 3000)
 var songs = []
 var reccomended = []
-exports.current_song = {}
 var users = []
 
 var server = http.createServer(function(request, response) {
     response.writeHead(200, { 'Content-Type': 'text/plain' });
     var request_url = url.parse(request.url);
+    if(request_url.search)
+        var query_string = qs.parse(request_url.search.substring(1))
+    else
+        var query_string = qs.parse('')
     //users portion of the API
     if (request_url.pathname.split('/')[1] === 'users') {
         //get list of users
@@ -30,9 +34,35 @@ var server = http.createServer(function(request, response) {
         //find a spefic user 
         else {
             var user_id = request_url.pathname.split('/')[2];
-            response.end(JSON.stringify(users.filter(function(x) {
-                return (x.name === user_id)
-            })));
+            var user = users.filter(function(x) {
+                    return (x.name === user_id)
+                })[0];
+            var index = users.indexOf(user);
+            if(request_url.pathname.split('/')[3] === 'likes'){
+                if(query_string['song']){
+                    console.log("LIKES")
+                    user.taste[query_string['song']] = 1;
+                }
+                else if(query_string['artist']){
+                    for (var i = songs.length - 1; i >= 0; i--) {
+                        if(songs[i].artist.name === query_string['artist'])
+                          user.taste[songs[i].playId] = 1;
+                    };
+                }
+            }
+            else if(request_url.pathname.split('/')[3] === 'dislikes'){
+                if(query_string['song']){
+                    user.taste[query_string['song']] = -1;
+                }
+                else if(query_string['artist']){
+                    for (var i = songs.length - 1; i >= 0; i--) {
+                        if(songs[i].artist.name === query_string['artist'])
+                          user.taste[songs[i].playId] = -1;
+                    };
+                }
+            }
+            users[index] = user;
+            response.end(JSON.stringify(user));
         }
     }
     //song portion of the API
@@ -42,13 +72,14 @@ var server = http.createServer(function(request, response) {
             var name = song.name;
             var artist = song.artist.name
             var album = song.album;
-            if (request_url.query === 'url=true') {
+            var id = song.playId;
+            if (query_string['url'] === 'true') {
                 pm.streamUrl(song.playId, function(url) {
-                    response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album }));
+                    response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album,'id':id }));
                 });
             } 
             else {
-                response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album }));
+                response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album,'id':id }));
             }
         } 
         else if (request_url.pathname.split('/')[2] === 'next') {
@@ -58,15 +89,16 @@ var server = http.createServer(function(request, response) {
             }
             var name = song.name;
             var artist = song.artist.name
-            current_song = song;
             var album = song.album;
+            var id = song.playId;
+            current_song = song;
             if (request_url.query === 'url=true') {
                 pm.streamUrl(song.playId, function(url) {
-                    response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album }));
+                    response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album,'id':id }));
                 });
             } 
             else {
-                response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album }));
+                response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album,'id':id }));
             }
         }
     } 
