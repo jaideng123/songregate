@@ -32,12 +32,12 @@
 <h4 class='text-center'> Here is your user code, make sure you to hold on to it</h4>
 <div class='row text-center'>
   <div class='medium-6 small-centered column user-code'>
-  	<span class='user-code__box'> <span class='user-code__code'>{{ userID }}</span> </span>
+  	<span class='user-code__box'> <span class='user-code__code'>{{ user.name }}</span> </span>
   </div>
 </div>
 <!-- Sends liked artists to the server and routes the user to music/<USERID> -->
 <div class='row text-center'>
-    <a ng-href='#/music/{{ userID }}' class='button success'>Join Room</a>
+    <a ng-href='#/music/{{ user.name }}' class='button success'>Join Room</a>
 </div>
 </div>
 <!-- END Hide -->
