@@ -62,7 +62,15 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http',
   function($scope, $routeParams, $http) {
 	//for GUI check purposes artists are hardcoded but will be random from server-side
-    $scope.artists = ['Taylor Swift','Kanye West','Keith Urban','Avicii','AWOL Nation']
+    $http.get('artists.json')
+       .then(function(res){
+          var artists = res.data.artists;
+          $scope.selected_artists = []
+          for (var i = 4; i >= 0; i--) {
+          	var randIndex = Math.floor((Math.random() * Number(artists.length)));
+          	$scope.selected_artists.push({'name':artists[randIndex],'score':0});
+          }
+        });
     $http({
 		  method: 'GET',
 		  url: api_url+'users/new'

@@ -11,7 +11,7 @@
 		<div ng-repeat="i in [0,1,2,3,4]">
 			<div class='row artist-list__artist'>
 				<div class='small-12 medium-6 column medium-centered'>
-					<div class='small-8 column artist-list__artist-name'>{{ artists[i] }}</div>
+					<div class='small-8 column artist-list__artist-name'>{{ selected_artists[i].name }}</div>
 					<button class='small-2 column like-button'>
 						<!-- Hide whichever is inactive -->
 						<i class='fa fa-thumbs-o-up fa-lg'></i>

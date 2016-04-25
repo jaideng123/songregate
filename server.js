@@ -101,7 +101,7 @@ var server = http.createServer(function(request, response) {
             var album = song.album;
             var id = song.playId;
             current_song = song;
-            if (request_url.query === 'url=true') {
+            if (query_string['url'] === 'true') {
                 pm.streamUrl(song.playId, function(url) {
                     response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album,'id':id }));
                 });
@@ -110,7 +110,7 @@ var server = http.createServer(function(request, response) {
                 response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album,'id':id }));
             }
         }
-    } 
+    }
     else {
         response.writeHead(404, { "Content-Type": "text/plain" });
         response.write("404 Not Found\n");
