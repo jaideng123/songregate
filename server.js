@@ -13,7 +13,16 @@ var reccomended = []
 var users = []
 
 var server = http.createServer(function(request, response) {
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    //response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Request-Method', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    if ( request.method === 'OPTIONS' ) {
+        response.writeHead(200);
+        response.end();
+        return;
+    }
     var request_url = url.parse(request.url);
     if(request_url.search)
         var query_string = qs.parse(request_url.search.substring(1))
