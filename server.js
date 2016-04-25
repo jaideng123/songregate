@@ -13,11 +13,11 @@ var reccomended = []
 var users = []
 
 var server = http.createServer(function(request, response) {
-    //response.writeHead(200, { 'Content-Type': 'text/plain' });
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Request-Method', '*');
     response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     response.setHeader('Access-Control-Allow-Headers', '*');
+    response.setHeader('Content-Type','application/json')
     if ( request.method === 'OPTIONS' ) {
         response.writeHead(200);
         response.end();
