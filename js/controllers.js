@@ -57,9 +57,10 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 	$scope.like = function(){
 		$http({
 		  method: 'GET',
-		  url: api_url+'users/'+$scope.userId+'/likes?song='+$scope.current_song.playId
+		  url: api_url+'users/'+$scope.userid+'/likes?song='+$scope.current_song.id
 		}).then(function successCallback(response) {
 		    $scope.user = response.data
+		    console.log($scope.user)
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
@@ -68,9 +69,10 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 	$scope.dislike = function(){
 		$http({
 		  method: 'GET',
-		  url: api_url+'users/'+$scope.userId+'/dislikes?song='+$scope.current_song.playId
+		  url: api_url+'users/'+$scope.userid+'/dislikes?song='+$scope.current_song.id
 		}).then(function successCallback(response) {
 		    $scope.user = response.data
+		    console.log($scope.user)
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.

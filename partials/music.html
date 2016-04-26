@@ -26,8 +26,8 @@
 		<!-- Send Song rating to server -->
 		<button class='small-3 column music-control__button' ng-click='like()'>
 			<!-- use whichever corresponds to current rating you have -->
-			<i class="fa fa-thumbs-o-up fa-3x" ng-hide='user.taste[current_song.playId] === 1' aria-hidden="true"></i>
-			<i class="fa fa-thumbs-up fa-3x" ng-show='user.taste[current_song.playId] === 1' aria-hidden="true"></i>
+			<i class="fa fa-thumbs-o-up fa-3x" ng-hide='user.taste[current_song.id] === 1' aria-hidden="true"></i>
+			<i class="fa fa-thumbs-up fa-3x" ng-show='user.taste[current_song.id] === 1' aria-hidden="true"></i>
 		</button>
 		<!-- Pause music -->
 		<button class='small-3 column music-control__button' ng-click = 'playPause()'>
@@ -42,8 +42,8 @@
 		<!-- Send Song Rating to Server -->
 		<button class='small-3 column music-control__button' ng-click='dislike()'>
 			<!-- use whichever corresponds to current rating you have -->
-			<i class="fa fa-thumbs-o-down fa-3x" ng-hide='user.taste[current_song.playId] === -1' aria-hidden="true"></i>
-			<i class="fa fa-thumbs-down fa-3x" ng-show='user.taste[current_song.playId] === -1'aria-hidden="true"></i>
+			<i class="fa fa-thumbs-o-down fa-3x" ng-hide='user.taste[current_song.id] === -1' aria-hidden="true"></i>
+			<i class="fa fa-thumbs-down fa-3x" ng-show='user.taste[current_song.id] === -1'aria-hidden="true"></i>
 		</button>
 	</div>
 </div>
