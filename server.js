@@ -11,6 +11,7 @@ var port = Number(process.env.PORT || 3000)
 var songs = []
 var reccomended = []
 var users = []
+var played = []
 
 var server = http.createServer(function(request, response) {
     response.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,7 +29,9 @@ var server = http.createServer(function(request, response) {
         var query_string = qs.parse(request_url.search.substring(1))
     else
         var query_string = qs.parse('')
+    //
     //users portion of the API
+    //
     if (request_url.pathname.split('/')[1] === 'users') {
         //get list of users
         if (request_url.pathname.split('/')[2] === 'all') {
@@ -74,7 +77,9 @@ var server = http.createServer(function(request, response) {
             response.end(JSON.stringify(user));
         }
     }
+    //
     //song portion of the API
+    //
     else if (request_url.pathname.split('/')[1] === 'song') {
         if (request_url.pathname.split('/')[2] === 'current') {
             var song = current_song;
@@ -94,13 +99,14 @@ var server = http.createServer(function(request, response) {
         else if (request_url.pathname.split('/')[2] === 'next') {
             var song = reccomended.pop();
             if(reccomended.length === 0){
-              reccomended = getReccomended(10);
+              reccomended = getReccomended(5);
             }
             var name = song.name;
             var artist = song.artist.name
             var album = song.album;
             var id = song.playId;
             current_song = song;
+            played.push(current_song.playId);
             if (query_string['url'] === 'true') {
                 pm.streamUrl(song.playId, function(url) {
                     response.end(JSON.stringify({ 'name': name, 'artist': artist, 'url': url, 'album': album,'id':id }));
@@ -134,6 +140,7 @@ fs.readFile('Songs.json', 'utf8', function(err, data) {
     console.log("Seed users created:" + users.length);
     reccomended = getReccomended(5);
     current_song = reccomended.pop();
+    played.push(current_song.playId);
     server.listen(port);
 });
 
@@ -174,7 +181,7 @@ var getReccomended = function(limit){
   console.log("Mono User Created");
   var results = alg.KNN(mono, users, 3);
   console.log("Nearest Neighbors Found");
-  var reccomended_songs = alg.reccomend(results, mono, songs, limit);
+  var reccomended_songs = alg.reccomend(results, mono, songs, limit, played);
   console.log("Reccomended Songs Found:" + reccomended_songs.length);
   return reccomended_songs
 }

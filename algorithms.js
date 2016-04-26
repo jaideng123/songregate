@@ -5,7 +5,7 @@ exports.songHash = {};
 exports.reccomended = []
 
 //The heart of our application - takes in nearest neighbors and gets reccomendations
-exports.reccomend = function(neighbors,user,songs,limit){
+exports.reccomend = function(neighbors,user,songs,limit,blacklist){
 	if(Object.keys(exports.songHash).length === 0 && JSON.stringify(exports.songHash) === JSON.stringify({}))
 		exports.setSongs(songs);
 	//gather potential candidates
@@ -23,7 +23,13 @@ exports.reccomend = function(neighbors,user,songs,limit){
 	}
 	var results = []
 	for (var i = 0; i < limit; i++) {
-		results.push(queue.dequeue())
+		var song = queue.dequeue();
+		if(blacklist){
+			while(blacklist.indexOf(song.playId) !== -1){
+				song = queue.dequeue();
+			}
+		}
+		results.push(song);
 	};
 	return results;
 }
