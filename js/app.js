@@ -5,7 +5,8 @@ $(document).foundation()
 
 var songregateApp = angular.module('songregateApp', [
   'ngRoute',
-  'songregateControllers'
+  'songregateControllers',
+  'ngAudio'
   //'songregateServices'
 ]);
 

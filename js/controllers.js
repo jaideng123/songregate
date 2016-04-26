@@ -10,31 +10,50 @@ songregateControllers.controller('WelcomeCtrl', ['$scope',
 	
   }]);
 
-songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$location','$http',
-  function($scope, $routeParams, $location,$http) {
+songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$location','$http','ngAudio',
+  function($scope, $routeParams, $location,$http,ngAudio) {
     $scope.userid = $location.path().split('/')[2] //will be in form ['','music','userid']
+    $scope.playing = false;
+
     $http({
 		  method: 'GET',
 		  url: api_url+'song/current?url=true'
 		}).then(function successCallback(response) {
 		    $scope.current_song = response.data
+		    $scope.sound = ngAudio.load($scope.current_song.url);
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
 	$scope.nextSong = function(){
+		if($scope.playing === true){
+				$scope.sound.pause();
+				$scope.playing = false;
+		}
 		$http({
 		  method: 'GET',
 		  url: api_url+'song/next?url=true'
 		}).then(function successCallback(response) {
 		    $scope.current_song = response.data
+		    $scope.sound = ngAudio.load($scope.current_song.url);
+		    if($scope.playing === false){
+				$scope.sound.play();
+				$scope.playing = true;
+			}
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
 	}
-	$scope.pausePlay = function(){
-		
+	$scope.playPause = function(){
+		if($scope.playing === false){
+			$scope.sound.play();
+			$scope.playing = true
+		}
+		else if($scope.playing === true){
+			$scope.sound.pause();
+			$scope.playing = false;
+		}
 	}
 	$scope.like = function(){
 		$http({

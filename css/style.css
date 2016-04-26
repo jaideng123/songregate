@@ -56,3 +56,6 @@ body {
   padding-bottom: 20px; }
   .music-control__button:hover {
     color: #59D8E5; }
+
+.progress__bar {
+  width: 100%; }
