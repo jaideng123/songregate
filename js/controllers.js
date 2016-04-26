@@ -14,7 +14,6 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
   function($scope, $routeParams, $location,$http,ngAudio) {
     $scope.userid = $location.path().split('/')[2] //will be in form ['','music','userid']
     $scope.playing = false;
-
     $http({
 		  method: 'GET',
 		  url: api_url+'song/current?url=true'
@@ -58,9 +57,9 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 	$scope.like = function(){
 		$http({
 		  method: 'GET',
-		  url: api_url+'users/'+$scope.userId+'/likes?song='+current_song.playId
+		  url: api_url+'users/'+$scope.userId+'/likes?song='+$scope.current_song.playId
 		}).then(function successCallback(response) {
-		    $scope.current_song = response.data
+		    $scope.user = response.data
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
@@ -69,14 +68,23 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 	$scope.dislike = function(){
 		$http({
 		  method: 'GET',
-		  url: api_url+'users/'+$scope.userId+'/dislikes?song='+current_song.playId
+		  url: api_url+'users/'+$scope.userId+'/dislikes?song='+$scope.current_song.playId
 		}).then(function successCallback(response) {
-		    $scope.current_song = response.data
+		    $scope.user = response.data
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
 	}
+	$http({
+		  method: 'GET',
+		  url: api_url+'users/'+$scope.userid
+		}).then(function successCallback(response) {
+		    $scope.user = response.data
+		  }, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
   }]);
 songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http','$location',
   function($scope, $routeParams, $http, $location) {
