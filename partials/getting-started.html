@@ -1,43 +1,45 @@
 <div ng-controller="StartCtrl">
-<div class="row">
-    <h3 class='text-center'>Hi there, we're just getting things set up for you</h3>
-</div>
-<h4 class='text-center block--padded'> Why don't you rate some artists for us? </h4>
-<!-- These will be random-ish -->
-<!-- Store these until they click join room, then send them to the server -->
-<div class='row text-center'>
-    <div class='small-12 medium-8 column medium-centered'>
-    	<!-- Repeat this for each artist we get (usually 5) -->
-		<div ng-repeat="i in [0,1,2,3,4]">
-			<div class='row artist-list__artist'>
-				<div class='small-12 medium-6 column medium-centered'>
-					<div class='small-8 column artist-list__artist-name'>{{ selected_artists[i].name }}</div>
-					<button class='small-2 column like-button'>
-						<!-- Hide whichever is inactive -->
-						<i class='fa fa-thumbs-o-up fa-lg'></i>
-						<i class='fa fa-thumbs-up fa-lg'></i>
-					</button>
-					<button class='small-2 column like-button'>
-						<!-- Hide whichever is inactive -->
-						<i class='fa fa-thumbs-o-down fa-lg'></i>
-						<i class='fa fa-thumbs-down fa-lg'></i>
-					</button>
-				</div>
-			</div>
-		</div>
-        <!-- END Repeat -->
+    <div class="row">
+        <h3 class='text-center'>Hi there, we're just getting things set up for you</h3>
     </div>
-</div>
-<!-- Hide this part until we get a response from the server -->
-<h4 class='text-center'> Here is your user code, make sure you to hold on to it</h4>
-<div class='row text-center'>
-  <div class='medium-6 small-centered column user-code'>
-  	<span class='user-code__box'> <span class='user-code__code'>{{ user.name }}</span> </span>
-  </div>
-</div>
-<!-- Sends liked artists to the server and routes the user to music/<USERID> -->
-<div class='row text-center'>
-    <a ng-href='#/music/{{ user.name }}' class='button success'>Join Room</a>
-</div>
+    <h4 class='text-center block--padded'> Why don't you rate some artists for us? </h4>
+    <!-- These will be random-ish -->
+    <!-- Store these until they click join room, then send them to the server -->
+    <div class='row text-center'>
+        <div class='small-12 medium-8 column medium-centered'>
+            <!-- Repeat this for each artist we get (usually 5) -->
+            <div ng-repeat="artist in selected_artists">
+                <div class='row artist-list__artist'>
+                    <div class='small-12 medium-6 column medium-centered'>
+                        <div class='small-8 column artist-list__artist-name'>{{ artist.name }}</div>
+                        <button class='small-2 column like-button' ng-click='artist = likeArtist(artist)'>
+                            <!-- Hide whichever is inactive -->
+                            <i class='fa fa-thumbs-o-up fa-lg' ng-hide='artist.score === 1'></i>
+                            <i class='fa fa-thumbs-up fa-lg' ng-show='artist.score === 1'></i>
+                        </button>
+                        <button class='small-2 column like-button' ng-click='artist = dislikeArtist(artist)'>
+                            <!-- Hide whichever is inactive -->
+                            <i class='fa fa-thumbs-o-down fa-lg' ng-hide='artist.score === -1'></i>
+                            <i class='fa fa-thumbs-down fa-lg' ng-show='artist.score === -1'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- END Repeat -->
+        </div>
+    </div>
+    <!-- Hide this part until we get a response from the server -->
+    <div ng-show='user'>
+        <h4 class='text-center'> Here is your user code, make sure you to hold on to it</h4>
+        <div class='row text-center'>
+            <div class='medium-6 small-centered column user-code'>
+                <span class='user-code__box'> <span class='user-code__code'>{{ user.name }}</span> </span>
+            </div>
+        </div>
+        <!-- Sends liked artists to the server and routes the user to music/<USERID> -->
+        <div class='row text-center'>
+            <a ng-click='continue()' class='button success'>Join Room</a>
+        </div>
+    </div>
 </div>
 <!-- END Hide -->

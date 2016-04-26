@@ -59,8 +59,8 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 		  });
 	}
   }]);
-songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http',
-  function($scope, $routeParams, $http) {
+songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http','$location',
+  function($scope, $routeParams, $http, $location) {
 	//for GUI check purposes artists are hardcoded but will be random from server-side
     $http.get('artists.json')
        .then(function(res){
@@ -71,6 +71,20 @@ songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http',
           	$scope.selected_artists.push({'name':artists[randIndex],'score':0});
           }
         });
+    $scope.likeArtist = function(artist){
+    	if(artist.score === 1)
+    		artist.score = 0;
+    	else
+    		artist.score = 1;
+    	return artist;
+    }
+    $scope.dislikeArtist = function(artist){
+    	if(artist.score === -1)
+    		artist.score = 0;
+    	else
+    		artist.score = -1;
+    	return artist;
+    }
     $http({
 		  method: 'GET',
 		  url: api_url+'users/new'
@@ -80,5 +94,32 @@ songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http',
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
+	$scope.continue = function(){
+		for (var i = $scope.selected_artists.length - 1; i >= 0; i--) {
+			if($scope.selected_artists[i].score === 1){
+				$http({
+				  method: 'GET',
+				  url: api_url+'users/'+$scope.user.name+'/likes'+$scope.selected_artists[i].name.replace(' ','+')
+				}).then(function successCallback(response) {
+				    $scope.user = response.data
+				  }, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				  });
+			}
+			else if($scope.selected_artists[i].score === -1){
+				$http({
+				  method: 'GET',
+				  url: api_url+'users/'+$scope.user.name+'/dislikes?artist='+$scope.selected_artists[i].name.replace(' ','+')
+				}).then(function successCallback(response) {
+				    $scope.user = response.data
+				  }, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				  });
+			}
+		}
+		$location.path( 'music/'+$scope.user.name );
+	}
 		
   }]);
