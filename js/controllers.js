@@ -18,8 +18,12 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 		  method: 'GET',
 		  url: api_url+'song/current?url=true'
 		}).then(function successCallback(response) {
-		    $scope.current_song = response.data
-		    $scope.sound = ngAudio.load($scope.current_song.url);
+			if( $scope.playing === false){
+				console.log('Playing');
+			    $scope.current_song = response.data
+			    $scope.sound = ngAudio.play($scope.current_song.url);
+			    $scope.playing = true;
+			}
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
@@ -34,11 +38,8 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 		  url: api_url+'song/next?url=true'
 		}).then(function successCallback(response) {
 		    $scope.current_song = response.data
-		    $scope.sound = ngAudio.load($scope.current_song.url);
-		    if($scope.playing === false){
-				$scope.sound.play();
-				$scope.playing = true;
-			}
+		    $scope.sound = ngAudio.play($scope.current_song.url);
+			$scope.playing = true;
 		  }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
