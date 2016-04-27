@@ -99,3 +99,8 @@ body{
 .progress__bar{
 	width: 100%;
 }
+@media only screen and (max-width: 50em) {
+	.row{
+		max-width: 100% !important;
+	}
+}
