@@ -88,6 +88,10 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
+	$scope.$watch('sound.progress', function(newValue, oldValue) {
+	  if(newValue === 1)
+	  	$scope.nextSong();
+	});
   }]);
 songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http','$location',
   function($scope, $routeParams, $http, $location) {
