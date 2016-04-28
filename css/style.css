@@ -62,3 +62,9 @@ body {
 
 body {
   overflow: hidden; }
+
+.view-frame {
+  box-shadow: 0px 0px 10px #202627; }
+
+.music-info__track {
+  display: block; }

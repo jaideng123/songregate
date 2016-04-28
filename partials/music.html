@@ -7,9 +7,9 @@
 </div>
 <div class='row text-center'>
 	<!-- Song -->
-	<span>{{ current_song.name }}</span>
+	<span class='music-info music-info__track'>{{ current_song.name }}</span>
 	<!-- Artist - Album -->
-	<span>{{ current_song.artist + ' - ' + current_song.album.name }}</span>
+	<span class='music-info music-info__artist'>{{ current_song.artist}}</span> - <span class='music-info music-info__album'>{{current_song.album.name}}</span>
 </div>
 <div class='row'>
 	<div class='small-10 medium-6 column small-centered'>
