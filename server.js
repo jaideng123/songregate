@@ -98,9 +98,6 @@ var server = http.createServer(function(request, response) {
         } 
         else if (request_url.pathname.split('/')[2] === 'next') {
             var song = reccomended.pop();
-            if(reccomended.length === 0){
-              reccomended = getReccomended(2);
-            }
             var name = song.name;
             var artist = song.artist.name
             var album = song.album;
@@ -114,6 +111,9 @@ var server = http.createServer(function(request, response) {
             } 
             else {
                 response.end(JSON.stringify({ 'name': name, 'artist': artist, 'album': album,'id':id }));
+            }
+            if(reccomended.length === 0){
+              reccomended = getReccomended(2);
             }
         }
     }
