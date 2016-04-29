@@ -10,9 +10,9 @@
   <div class='medium-6 small-centered column'>
     <h3 class='text-center'> Returning User? </h3>
     <!-- grab user id from server then route to music/<USERID> -->
-    <input class='sign-in__textbox small-centered'type="text" value="" placeholder="User Code">
+    <input class='sign-in__textbox small-centered' type="text" ng-model='user_code'>
   </div>
 </div>
 <div class='row text-center'>
-  <button class='button success'>Rejoin Room</button>
+  <a ng-href='#/music/{{user_code}}' class='button success'>Rejoin Room</a>
 </div>

@@ -7,7 +7,7 @@ var songregateControllers = angular.module('songregateControllers', []);
 
 songregateControllers.controller('WelcomeCtrl', ['$scope',
   function($scope) {
-	
+	$scope.user_code = ''
   }]);
 
 songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$location','$http','ngAudio',
