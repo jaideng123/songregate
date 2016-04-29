@@ -12,22 +12,38 @@ songregateControllers.controller('WelcomeCtrl', ['$scope',
 
 songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$location','$http','ngAudio',
   function($scope, $routeParams, $location,$http,ngAudio) {
+  	$scope.isLeader = $location.search()['admin']
     $scope.userid = $location.path().split('/')[2] //will be in form ['','music','userid']
     $scope.playing = false;
-    $http({
-		  method: 'GET',
-		  url: api_url+'song/current?url=true'
-		}).then(function successCallback(response) {
-			if( $scope.playing === false){
-				console.log('Playing');
-			    $scope.current_song = response.data
-			    $scope.sound = ngAudio.play($scope.current_song.url);
-			    $scope.playing = true;
-			}
-		  }, function errorCallback(response) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
+    if($scope.isLeader){
+	    $http({
+			  method: 'GET',
+			  url: api_url+'song/current?url=true'
+			}).then(function successCallback(response) {
+				if( $scope.playing === false){
+					console.log('Playing');
+				    $scope.current_song = response.data
+				    $scope.sound = ngAudio.play($scope.current_song.url);
+				    $scope.playing = true;
+				}
+			  }, function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+	}
+	else{
+		$http({
+			  method: 'GET',
+			  url: api_url+'song/current'
+			}).then(function successCallback(response) {
+				if( $scope.playing === false){
+				    $scope.current_song = response.data
+				}
+			  }, function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+	}
 	$scope.nextSong = function(){
 		if($scope.playing === true){
 				$scope.sound.pause();
@@ -88,10 +104,27 @@ songregateControllers.controller('MusicCtrl', ['$scope', '$routeParams', '$locat
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });
-	$scope.$watch('sound.progress', function(newValue, oldValue) {
-	  if(newValue === 1)
-	  	$scope.nextSong();
-	});
+	if($scope.isLeader){
+		$scope.$watch('sound.progress', function(newValue, oldValue) {
+		  if(newValue === 1)
+		  	$scope.nextSong();
+		});
+	}
+	else{
+		window.setInterval(function(){
+			$http({
+			  method: 'GET',
+			  url: api_url+'song/current'
+			}).then(function successCallback(response) {
+				if( $scope.playing === false){
+				    $scope.current_song = response.data
+				}
+			  }, function errorCallback(response) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+		}, 2000);
+	}
   }]);
 songregateControllers.controller('StartCtrl', ['$scope', '$routeParams','$http','$location',
   function($scope, $routeParams, $http, $location) {

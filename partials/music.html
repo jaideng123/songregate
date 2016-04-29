@@ -16,7 +16,7 @@
 		<img ng-src= "{{ current_song.album.art }}" alt="">
 	</div>
 </div>
-<div class='row'>
+<div class='row' ng-show='isLeader'>
 	<div class='small-10 medium-6 column small-centered'>
 		<input class='progress__bar' type='range' ng-model='sound.progress' min='0' max='1' step='0.01' >
 	</div>
@@ -30,13 +30,13 @@
 			<i class="fa fa-thumbs-up fa-3x" ng-show='user.taste[current_song.id] === 1' aria-hidden="true"></i>
 		</button>
 		<!-- Pause music -->
-		<button class='small-3 column music-control__button' ng-click = 'playPause()'>
+		<button class='small-3 column music-control__button' ng-show='isLeader' ng-click = 'playPause()'>
 			<!-- hide one when the other is in use -->
 			<i class="fa fa-pause fa-3x" ng-show='playing' aria-hidden="true"></i>
 			<i class="fa fa-play fa-3x" ng-hide='playing' aria-hidden="true"></i>
 		</button>
 		<!-- get next song from server -->
-		<button class='small-3 column music-control__button' ng-click= 'nextSong()'>
+		<button class='small-3 column music-control__button' ng-show='isLeader' ng-click= 'nextSong()'>
 			<i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
 		</button>
 		<!-- Send Song Rating to Server -->
