@@ -1,0 +1,363 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"next",
+				"nextSong"
+			],
+			[
+				"current",
+				"current_song"
+			],
+			[
+				"curren",
+				"current_song"
+			],
+			[
+				"pla",
+				"played"
+			],
+			[
+				"user",
+				"userid"
+			],
+			[
+				"set",
+				"setHeader"
+			],
+			[
+				"re",
+				"require"
+			],
+			[
+				"play",
+				"playId"
+			],
+			[
+				"reque",
+				"request_url"
+			],
+			[
+				"requ",
+				"request_url"
+			],
+			[
+				"curr",
+				"current_song"
+			],
+			[
+				"currn",
+				"current_song"
+			],
+			[
+				"get",
+				"getReccomended"
+			],
+			[
+				"new",
+				"new_user"
+			],
+			[
+				"rand",
+				"randomId"
+			],
+			[
+				"req",
+				"request_url"
+			],
+			[
+				"lo",
+				"logger"
+			],
+			[
+				"im",
+				"ImageId"
+			],
+			[
+				"SEN",
+				"SENDGRID_USERNAME"
+			],
+			[
+				"ko",
+				"koAgency"
+			],
+			[
+				"g",
+				"g_CaseFlowManager"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/jaideng123/mechajaiden/.gitignore",
+			"settings":
+			{
+				"buffer_size": 38,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 548.0,
+		"last_filter": "inst",
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 622.0
+	},
+	"console":
+	{
+		"height": 183.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/jaideng123/mechajaiden"
+	],
+	"file_history":
+	[
+		"/home/jaideng123/songregate/artists.json",
+		"/home/jaideng123/songregate/partials/getting-started.html",
+		"/home/jaideng123/songregate/server.js",
+		"/home/jaideng123/ptview/config/cloudinary.yml",
+		"/home/jaideng123/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/jaideng123/ptview/.gitignore",
+		"/home/jaideng123/ptview/app/assets/javascripts/people.json",
+		"/home/jaideng123/ptview/Gemfile",
+		"/home/jaideng123/ptview/app/controllers/users_controller.rb",
+		"/home/jaideng123/ptview/app/assets/javascripts/application.js",
+		"/home/jaideng123/ptview/app/views/users/_form.html.erb",
+		"/home/jaideng123/ptview/app/views/layouts/application.html.erb",
+		"/home/jaideng123/ptview/app/views/pages/onNow.html.erb",
+		"/home/jaideng123/ptview/config/secrets.yml",
+		"/home/jaideng123/ptview/config/application.rb",
+		"/tmp/mozilla_jaideng1230/cloudinary.yml",
+		"/home/jaideng123/ptview/config/development.yml",
+		"/home/jaideng123/.config/sublime-text-3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/home/jaideng123/HomeHealth-CaseFlow/src/CaseFlowBrowser/views/agencies/AgencyListView.js",
+		"/home/jaideng123/HomeHealth-CaseFlow/src/CaseFlowBrowser/views/agencies/AgencyView.mst",
+		"/home/jaideng123/.config/sublime-text-3/Packages/GitGutter/GitGutter.sublime-settings",
+		"/home/jaideng123/displaylink-evdi-opensuse/build/displaylink-driver-1.0.68/displaylink-installer.sh",
+		"/home/jaideng123/.cache/.fr-A5JK2z/LICENSE",
+		"/home/jaideng123/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/jaideng123/HomeHealth-CaseFlow/src/CaseFlowBrowser/CaseFlowManager.js",
+		"/home/jaideng123/HomeHealth-CaseFlow/build/gulpfile.js",
+		"/home/jaideng123/HomeHealth-CaseFlow/tools/sqlpump-utf8.py",
+		"/home/jaideng123/HomeHealth-CaseFlow/.gitignore",
+		"/home/jaideng123/touchegg",
+		"/home/jaideng123/HomeHealth-CaseFlow/bootstrap.sh",
+		"/home/jaideng123/HomeHealth-CaseFlow/conf/nginx/caseflow-vagrant.conf",
+		"/home/jaideng123/HomeHealth-CaseFlow/conf/nginx/caseflow-jaiden.conf",
+		"/etc/nginx/nginx.conf"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 120.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"h5",
+			"selected_artists",
+			"}",
+			"'",
+			"res",
+			"request_url",
+			"current_song",
+			".path",
+			";\n",
+			"});\n",
+			"    \n",
+			"SENDGRID",
+			"image",
+			"ImageId",
+			":host",
+			"EMAIL_HOST",
+			"SENDGRID_USERNAME",
+			"development.yml"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/jaideng123/mechajaiden/.gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 38,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								38,
+								38
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 45.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "mechajaiden.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 371.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}
