@@ -138,7 +138,7 @@ fs.readFile('Songs.json', 'utf8', function(err, data) {
     users = seed.preMadeUsers(songs);
     users.push.apply(users, seed.randomUsers(songs, artists, 1));
     console.log("Seed users created:" + users.length);
-    reccomended = getReccomended(5);
+    reccomended = getReccomended(2);
     current_song = reccomended.pop();
     played.push(current_song.playId);
     server.listen(port);
