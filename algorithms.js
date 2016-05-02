@@ -18,7 +18,7 @@ exports.reccomend = function(neighbors,user,songs,limit,blacklist){
 	var queue = new pq({ comparator: function(a, b) { return b.score - a.score; }});
 	for(key in user.taste){
 		var song = exports.songHash[key]
-		song.score = user.taste[key] + (song.popularity/1000)
+		song.score = user.taste[key] + (song.popularity/10000)
 		queue.queue(song);
 	}
 	var results = []
